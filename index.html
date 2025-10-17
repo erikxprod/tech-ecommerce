@@ -264,12 +264,12 @@
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="text-4xl mb-4">📱</div>
           <h3 class="font-semibold text-lg mb-2">WhatsApp</h3>
-          <p class="text-gray-600">+62 812-3456-7890</p>
+          <p class="text-gray-600">+62 895-4143-57400</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="text-4xl mb-4">✉️</div>
           <h3 class="font-semibold text-lg mb-2">Email</h3>
-          <p class="text-gray-600">support@tokotani.com</p>
+          <p class="text-gray-600">candrasuryapermana79@gmail.com</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md">
           <div class="text-4xl mb-4">📍</div>
@@ -500,9 +500,9 @@
       message += `%0ATotal: Rp ${cart.reduce((t,i)=>t+i.price*i.qty,0).toLocaleString()}%0A%0AData Pembeli:%0A👤 Nama: ${name}%0A📱 HP: ${phone}%0A🏠 Alamat: ${address}`;
 
       if (method === 'whatsapp') {
-        window.open(`https://wa.me/6281234567890?text=${message}`, '_blank');
+        window.open(`https://wa.me/62895414357400?text=${message}`, '_blank');
       } else {
-        window.location.href = `mailto:support@tokotani.com?subject=Pesanan Baru&body=${message}`;
+        window.location.href = `mailto:candrasuryapermana79@gmail.com?subject=Pesanan Baru&body=${message}`;
       }
     }
 
