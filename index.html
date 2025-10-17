@@ -1,403 +1,555 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TokoTani - Solusi Alat Pertanian Modern</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root{
-      --accent: #dc2626;
-      --muted:#6b7280;
-      --glass: rgba(255,255,255,0.7);
-    }
-    body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TokoTani - Solusi Alat Pertanian Modern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --accent: #dc2626;
+            --muted: #6b7280;
+            --glass: rgba(255, 255, 255, 0.7);
+        }
 
-    /* Smooth fade-up reveal for scroll */
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; will-change: opacity, transform; }
-    .reveal.show { opacity: 1; transform: translateY(0); }
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    /* hover scale (kept) */
-    .hover-scale { transition: transform 0.35s ease, box-shadow 0.35s ease; }
-    .hover-scale:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 12px 30px rgba(16,24,40,0.08); }
+        /* Smooth fade-up reveal for scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .6s ease, transform .6s ease;
+            will-change: opacity, transform;
+        }
 
-    /* modal animation */
-    .modal-fade-in { animation: modalFadeIn 0.28s ease-out both; }
-    @keyframes modalFadeIn { from { opacity: 0; transform: translateY(10px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* subtle button micro interaction */
-    .btn-ghost { transition: transform .15s ease, box-shadow .15s ease; }
-    .btn-ghost:active { transform: translateY(1px) scale(.995); }
+        /* hover scale (kept) */
+        .hover-scale {
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
 
-    /* bottom nav modern */
-    .bottom-nav{
-      position: fixed;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 32px);
-      max-width: 520px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
-      border-radius: 14px;
-      border: 1px solid #eee;
-      box-shadow: 0 8px 30px rgba(15,23,42,0.08);
-      z-index: 60;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 62px;
-      padding: 6px 8px;
-      backdrop-filter: blur(6px);
-      gap: 4px;
-    }
-    .bottom-item{
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:8px 10px;
-      border-radius:10px;
-      color:var(--muted);
-      font-size:0.85rem;
-      transition: all .18s ease;
-      user-select:none;
-    }
-    .bottom-item .icon{
-      font-size:20px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .bottom-item.active{
-      background: linear-gradient(90deg, rgba(220,38,38,0.12), rgba(220,38,38,0.06));
-      color:var(--accent);
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 8px 18px rgba(220,38,38,0.08);
-    }
+        .hover-scale:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+        }
 
-    /* hide desktop nav on small */
-    @media (max-width: 768px) {
-      nav { display:none; }
-      body { padding-bottom: 100px; } /* allow space for bottom nav */
-      .desktop-only { display:none; }
-      section { text-align:center; }
-    }
+        /* modal animation */
+        .modal-fade-in {
+            animation: modalFadeIn 0.28s ease-out both;
+        }
 
-    /* improve hero text scaling on very small screens */
-    @media (max-width: 420px){
-      h2.hero-title { font-size: 1.4rem !important; }
-      .bottom-item span.label{ display:none; }
-    }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.99);
+            }
 
-    /* product card tweaks */
-    .product-card { transition: transform .28s ease, box-shadow .28s ease; will-change: transform; }
-    .product-card:focus-within, .product-card:hover { transform: translateY(-6px); box-shadow: 0 10px 28px rgba(16,24,40,0.06); }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
 
-    /* small badge for mobile cart */
-    .cart-badge {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      background: var(--accent);
-      color: white;
-      width:20px;
-      height:20px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      font-size:11px;
-      box-shadow: 0 2px 6px rgba(220,38,38,0.18);
-    }
+        /* subtle button micro interaction */
+        .btn-ghost {
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
 
-    /* subtle pulsing on hero CTA */
-    .pulse {
-      position:relative;
-      overflow:visible;
-    }
-    .pulse::after {
-      content:'';
-      position:absolute;
-      inset:0;
-      border-radius: 10px;
-      transform:scale(1);
-      opacity:0;
-      transition: opacity .4s ease, transform .4s ease;
-    }
-    .pulse:hover::after{ opacity:1; transform:scale(1.04); }
+        .btn-ghost:active {
+            transform: translateY(1px) scale(.995);
+        }
 
-    /* accessible hidden for screen readers */
-    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+        /* bottom nav modern */
+        .bottom-nav {
+            position: fixed;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 520px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
+            border-radius: 14px;
+            border: 1px solid #eee;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+            z-index: 60;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 62px;
+            padding: 6px 8px;
+            backdrop-filter: blur(6px);
+            gap: 4px;
+        }
 
-  </style>
+        .bottom-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            transition: all .18s ease;
+            user-select: none;
+        }
+
+        .bottom-item .icon {
+            font-size: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-item.active {
+            background: linear-gradient(90deg, rgba(220, 38, 38, 0.12), rgba(220, 38, 38, 0.06));
+            color: var(--accent);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 18px rgba(220, 38, 38, 0.08);
+        }
+
+        /* hide desktop nav on small */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            body {
+                padding-bottom: 100px;
+            }
+
+            /* allow space for bottom nav */
+            .desktop-only {
+                display: none;
+            }
+
+            section {
+                text-align: center;
+            }
+        }
+
+        /* improve hero text scaling on very small screens */
+        @media (max-width: 420px) {
+            h2.hero-title {
+                font-size: 1.4rem !important;
+            }
+
+            .bottom-item span.label {
+                display: none;
+            }
+        }
+
+        /* product card tweaks */
+        .product-card {
+            transition: transform .28s ease, box-shadow .28s ease;
+            will-change: transform;
+        }
+
+        .product-card:focus-within,
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 28px rgba(16, 24, 40, 0.06);
+        }
+
+        /* small badge for mobile cart */
+        .cart-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--accent);
+            color: white;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            font-size: 11px;
+            box-shadow: 0 2px 6px rgba(220, 38, 38, 0.18);
+        }
+
+        /* subtle pulsing on hero CTA */
+        .pulse {
+            position: relative;
+            overflow: visible;
+        }
+
+        .pulse::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 10px;
+            transform: scale(1);
+            opacity: 0;
+            transition: opacity .4s ease, transform .4s ease;
+        }
+
+        .pulse:hover::after {
+            opacity: 1;
+            transform: scale(1.04);
+        }
+
+        /* accessible hidden for screen readers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Top Navigation (Desktop) -->
-  <nav class="bg-white shadow-md fixed w-full top-0 z-50 hidden md:block">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center gap-4">
-          <h1 class="text-2xl font-bold text-red-600">🌾 TokoTani</h1>
-          <p class="text-sm text-gray-500">Solusi Alat Pertanian Modern</p>
-        </div>
-        <div class="flex items-center space-x-4">
-          <a href="#produk" class="text-gray-700 hover:text-red-600 font-medium">Produk</a>
-          <a href="#tentang" class="text-gray-700 hover:text-red-600 font-medium">Tentang</a>
-          <button onclick="toggleCart()" class="relative bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition btn-ghost">
-            🛒 Keranjang
-            <span id="cartCount" class="absolute -top-2 -right-2 bg-white text-red-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Bottom Navigation (Mobile) -->
-  <div class="bottom-nav md:hidden" role="navigation" aria-label="Bottom Navigation">
-    <button class="bottom-item" data-target="hero" onclick="scrollToSection('hero')">
-      <span class="icon">🏠</span>
-      <span class="label">Beranda</span>
-    </button>
-    <button class="bottom-item" data-target="produk" onclick="scrollToSection('produk')">
-      <span class="icon">🛍️</span>
-      <span class="label">Produk</span>
-    </button>
-    <button class="bottom-item" data-target="cart" onclick="toggleCart(); setActiveBottom('cart')">
-      <span class="icon">🛒</span>
-      <span class="label">Keranjang</span>
-      <span id="cartCountMobile" class="cart-badge">0</span>
-    </button>
-  </div>
-
-  <!-- Hero Section -->
-  <section id="hero" class="relative mt-16 md:mt-16 bg-gradient-to-r from-red-600 to-red-700 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-28">
-      <div class="grid md:grid-cols-2 gap-6 items-center">
-        <div class="fade-in reveal text-center md:text-left">
-          <h2 class="hero-title text-2xl md:text-5xl font-bold mb-3">Solusi Alat Tani Modern</h2>
-          <p class="text-lg md:text-2xl mb-2 opacity-95">Murah & Berkualitas — tingkatkan produktivitas pertanian Anda</p>
-          <p class="text-base md:text-lg mb-6 opacity-90">Peralatan terpercaya untuk petani cerdas.</p>
-          <div class="flex justify-center md:justify-start gap-3">
-            <button onclick="scrollToSection('produk')" class="bg-white text-red-600 px-5 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition hover-scale pulse btn-ghost">
-              🛍️ Belanja Sekarang
-            </button>
-            <a href="#tentang" class="bg-white/20 text-white px-4 py-3 rounded-lg text-lg font-medium hover:bg-white/30 transition btn-ghost">Tentang Kami</a>
-          </div>
-        </div>
-        <div class="hidden md:block reveal">
-          <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&h=600&fit=crop" alt="Alat Pertanian" class="rounded-xl shadow-2xl">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Banner Slider -->
-  <section class="relative w-full bg-white py-6 reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="relative overflow-hidden rounded-xl shadow-lg">
-        <div id="bannerSlider" class="flex transition-transform duration-700 ease-in-out">
-          <!-- keep banner images - preserve your image srcs -->
-          <img src="96319eb6-820a-4620-950a-98cceeba4466.png" class="w-full flex-shrink-0 object-cover" alt="Banner 1">
-          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&h=500&fit=crop" class="w-full flex-shrink-0 object-cover" alt="Banner 2">
-          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&h=500&fit=crop" class="w-full flex-shrink-0 object-cover" alt="Banner 3">
-        </div>
-
-        <!-- Navigasi -->
-        <button id="prevSlide" class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-700 rounded-full p-2 shadow-md btn-ghost">❮</button>
-        <button id="nextSlide" class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-700 rounded-full p-2 shadow-md btn-ghost">❯</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Produk -->
-  <section id="produk" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-    <div class="text-center mb-10 reveal">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Katalog Produk Kami</h2>
-      <p class="text-lg text-gray-600">Pilihan terbaik untuk kebutuhan pertanian modern</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="productGrid"></div>
-  </section>
-
-  <!-- Tentang -->
-  <section id="tentang" class="bg-white py-12 md:py-16 reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <h2 class="text-3xl font-bold text-gray-800 mb-4">Tentang Kami</h2>
-          <p class="text-gray-600 mb-4">TokoTani adalah platform e-commerce terpercaya yang menyediakan berbagai alat pertanian modern berkualitas tinggi dengan harga terjangkau.</p>
-          <p class="text-gray-600 mb-4">Kami berkomitmen membantu petani Indonesia meningkatkan produktivitas dengan teknologi pertanian terkini.</p>
-          <div class="flex flex-wrap gap-6 mt-6">
-            <div class="text-center">
-              <p class="text-2xl md:text-3xl font-bold text-red-600">500+</p>
-              <p class="text-gray-600">Produk</p>
+    <!-- Top Navigation (Desktop) -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50 hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-4">
+                    <h1 class="text-2xl font-bold text-red-600">🌾 TokoTani</h1>
+                    <p class="text-sm text-gray-500">Solusi Alat Pertanian Modern</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#produk" class="text-gray-700 hover:text-red-600 font-medium">Produk</a>
+                    <a href="#tentang" class="text-gray-700 hover:text-red-600 font-medium">Tentang</a>
+                    <button onclick="toggleCart()"
+                        class="relative bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition btn-ghost">
+                        🛒 Keranjang
+                        <span id="cartCount"
+                            class="absolute -top-2 -right-2 bg-white text-red-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">0</span>
+                    </button>
+                </div>
             </div>
-            <div class="text-center">
-              <p class="text-2xl md:text-3xl font-bold text-red-600">10K+</p>
-              <p class="text-gray-600">Pelanggan</p>
-            </div>
-            <div class="text-center">
-              <p class="text-2xl md:text-3xl font-bold text-red-600">100%</p>
-              <p class="text-gray-600">Terpercaya</p>
-            </div>
-          </div>
         </div>
-        <div class="rounded-lg overflow-hidden shadow-xl">
-          <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&h=600&fit=crop" alt="Petani" class="w-full h-full object-cover">
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Hubungi Kami -->
-  <section class="bg-gray-100 py-12 reveal">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Hubungi Kami</h2>
-        <p class="text-lg text-gray-600">Ada pertanyaan? Kami siap membantu Anda</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6 text-center">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="text-4xl mb-4">📱</div>
-          <h3 class="font-semibold text-lg mb-2">WhatsApp</h3>
-          <p class="text-gray-600">+62 895-4143-57400</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="text-4xl mb-4">✉️</div>
-          <h3 class="font-semibold text-lg mb-2">Email</h3>
-          <p class="text-gray-600">candrasuryapermana79@gmail.com</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="text-4xl mb-4">📍</div>
-          <h3 class="font-semibold text-lg mb-2">Alamat</h3>
-          <p class="text-gray-600">Dusun II RT 02/RW 02, Ds. Tarikolot, Kec. Cibeureum, Kab. Kuningan</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cart Modal (unchanged logic) -->
-  <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
-    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-fade-in">
-      <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
-        <h3 class="text-2xl font-bold text-gray-800">🛒 Keranjang Belanja</h3>
-        <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-      </div>
-      <div id="cartItems" class="p-6"></div>
-      <div class="sticky bottom-0 bg-gray-50 border-t p-6">
-        <div class="flex justify-between items-center mb-4">
-          <span class="text-xl font-semibold">Total:</span>
-          <span id="cartTotal" class="text-2xl font-bold text-red-600">Rp 0</span>
-        </div>
-        <button onclick="showCheckoutForm()" class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
-          Checkout Sekarang
+    <!-- Bottom Navigation (Mobile) -->
+    <div class="bottom-nav md:hidden" role="navigation" aria-label="Bottom Navigation">
+        <button class="bottom-item" data-target="hero" onclick="scrollToSection('hero')">
+            <span class="icon">🏠</span>
+            <span class="label">Beranda</span>
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Checkout Modal (unchanged logic) -->
-  <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
-    <div class="bg-white rounded-lg max-w-md w-full modal-fade-in">
-      <div class="bg-red-600 text-white p-6 rounded-t-lg">
-        <h3 class="text-2xl font-bold">📝 Data Pembeli</h3>
-        <p class="text-sm opacity-90 mt-1">Lengkapi data untuk melanjutkan pesanan</p>
-      </div>
-      <form id="checkoutForm" class="p-6">
-        <div class="mb-4">
-          <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap *</label>
-          <input type="text" id="buyerName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600" placeholder="Masukkan nama Anda">
-        </div>
-        <div class="mb-4">
-          <label class="block text-gray-700 font-semibold mb-2">No. HP / WhatsApp *</label>
-          <input type="tel" id="buyerPhone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600" placeholder="08xx xxxx xxxx">
-        </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 font-semibold mb-2">Alamat Lengkap *</label>
-          <textarea id="buyerAddress" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600" placeholder="Jl. Nama Jalan, Kota, Provinsi"></textarea>
-        </div>
-        <div class="mb-6">
-          <p class="text-sm text-gray-600 mb-3">Pilih metode pengiriman pesanan:</p>
-          <div class="flex gap-3">
-            <button type="button" onclick="submitCheckout('whatsapp')" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition flex items-center justify-center gap-2">
-              <span>📱</span> WhatsApp
-            </button>
-            <button type="button" onclick="submitCheckout('email')" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2">
-              <span>✉️</span> Email
-            </button>
-          </div>
-        </div>
-        <button type="button" onclick="closeCheckoutForm()" class="w-full bg-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-400 transition">
-          Batal
+        <button class="bottom-item" data-target="produk" onclick="scrollToSection('produk')">
+            <span class="icon">🛍️</span>
+            <span class="label">Produk</span>
         </button>
-      </form>
+        <button class="bottom-item" data-target="cart" onclick="toggleCart(); setActiveBottom('cart')">
+            <span class="icon">🛒</span>
+            <span class="label">Keranjang</span>
+            <span id="cartCountMobile" class="cart-badge">0</span>
+        </button>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8 mt-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-lg font-semibold mb-2">🌾 TokoTani</p>
-      <p class="text-gray-400">&copy; 2025 TokoTani. Semua hak dilindungi.</p>
+    <!-- Hero Section -->
+    <section id="hero" class="relative mt-16 md:mt-16 bg-gradient-to-r from-red-600 to-red-700 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-28">
+            <div class="grid md:grid-cols-2 gap-6 items-center">
+                <div class="fade-in reveal text-center md:text-left">
+                    <h2 class="hero-title text-2xl md:text-5xl font-bold mb-3">Solusi Alat Tani Modern</h2>
+                    <p class="text-lg md:text-2xl mb-2 opacity-95">Murah & Berkualitas — tingkatkan produktivitas
+                        pertanian Anda</p>
+                    <p class="text-base md:text-lg mb-6 opacity-90">Peralatan terpercaya untuk petani cerdas.</p>
+                    <div class="flex justify-center md:justify-start gap-3">
+                        <button onclick="scrollToSection('produk')"
+                            class="bg-white text-red-600 px-5 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition hover-scale pulse btn-ghost">
+                            🛍️ Belanja Sekarang
+                        </button>
+                        <a href="#tentang"
+                            class="bg-white/20 text-white px-4 py-3 rounded-lg text-lg font-medium hover:bg-white/30 transition btn-ghost">Tentang
+                            Kami</a>
+                    </div>
+                </div>
+                <div class="hidden md:block reveal">
+                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&h=600&fit=crop"
+                        alt="Alat Pertanian" class="rounded-xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Slider -->
+    <section class="relative w-full bg-white py-6 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative overflow-hidden rounded-xl shadow-lg">
+                <div id="bannerSlider" class="flex transition-transform duration-700 ease-in-out">
+                    <!-- keep banner images - preserve your image srcs -->
+                    <img src="96319eb6-820a-4620-950a-98cceeba4466.png" class="w-full flex-shrink-0 object-cover"
+                        alt="Banner 1">
+                    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&h=500&fit=crop"
+                        class="w-full flex-shrink-0 object-cover" alt="Banner 2">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&h=500&fit=crop"
+                        class="w-full flex-shrink-0 object-cover" alt="Banner 3">
+                </div>
+
+                <!-- Navigasi -->
+                <button id="prevSlide"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-700 rounded-full p-2 shadow-md btn-ghost">❮</button>
+                <button id="nextSlide"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-700 rounded-full p-2 shadow-md btn-ghost">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produk -->
+    <section id="produk" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div class="text-center mb-10 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Katalog Produk Kami</h2>
+            <p class="text-lg text-gray-600">Pilihan terbaik untuk kebutuhan pertanian modern</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="productGrid"></div>
+    </section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="bg-white py-12 md:py-16 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Tentang Kami</h2>
+                    <p class="text-gray-600 mb-4">
+                        <strong>TokoTani</strong> adalah usaha rumahan yang baru dirintis untuk menyediakan berbagai
+                        alat dan perlengkapan pertanian bagi petani dan masyarakat umum.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        Kami memulai langkah kecil dengan semangat besar untuk mendukung pertanian lokal.
+                        Meskipun produk kami masih terbatas, kami terus berusaha menambah pilihan dan menjaga kualitas
+                        agar pelanggan merasa puas berbelanja di TokoTani.
+                    </p>
+                    <p class="text-gray-600 mb-4">
+                        Harapan kami, TokoTani bisa menjadi bagian dari kemajuan pertanian Indonesia melalui pelayanan
+                        yang ramah, harga bersahabat, dan produk yang bermanfaat.
+                    </p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&h=600&fit=crop"
+                        alt="Petani" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Hubungi Kami -->
+    <section class="bg-gray-100 py-12 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Hubungi Kami</h2>
+                <p class="text-lg text-gray-600">Ada pertanyaan? Kami siap membantu Anda</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="font-semibold text-lg mb-2">WhatsApp</h3>
+                    <p class="text-gray-600">+62 895-4143-57400</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">✉️</div>
+                    <h3 class="font-semibold text-lg mb-2">Email</h3>
+                    <p class="text-gray-600">candrasuryapermana79@gmail.com</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="text-4xl mb-4">📍</div>
+                    <h3 class="font-semibold text-lg mb-2">Alamat</h3>
+                    <p class="text-gray-600">Dusun II RT 02/RW 02, Ds. Tarikolot, Kec. Cibeureum, Kab. Kuningan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal (unchanged logic) -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-fade-in">
+            <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-gray-800">🛒 Keranjang Belanja</h3>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div id="cartItems" class="p-6"></div>
+            <div class="sticky bottom-0 bg-gray-50 border-t p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xl font-semibold">Total:</span>
+                    <span id="cartTotal" class="text-2xl font-bold text-red-600">Rp 0</span>
+                </div>
+                <button onclick="showCheckoutForm()"
+                    class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                    Checkout Sekarang
+                </button>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- Script (kept original functions + enhancements for mobile UI/animation) -->
-  <script>
-    /* -----------------------
+    <!-- Checkout Modal (unchanged logic) -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full modal-fade-in">
+            <div class="bg-red-600 text-white p-6 rounded-t-lg">
+                <h3 class="text-2xl font-bold">📝 Data Pembeli</h3>
+                <p class="text-sm opacity-90 mt-1">Lengkapi data untuk melanjutkan pesanan</p>
+            </div>
+            <form id="checkoutForm" class="p-6">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap *</label>
+                    <input type="text" id="buyerName" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                        placeholder="Masukkan nama Anda">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">No. HP / WhatsApp *</label>
+                    <input type="tel" id="buyerPhone" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                        placeholder="08xx xxxx xxxx">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-2">Alamat Lengkap *</label>
+                    <textarea id="buyerAddress" required rows="3"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600"
+                        placeholder="Jl. Nama Jalan, Kota, Provinsi"></textarea>
+                </div>
+                <div class="mb-6">
+                    <p class="text-sm text-gray-600 mb-3">Pilih metode pengiriman pesanan:</p>
+                    <div class="flex gap-3">
+                        <button type="button" onclick="submitCheckout('whatsapp')"
+                            class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition flex items-center justify-center gap-2">
+                            <span>📱</span> WhatsApp
+                        </button>
+                        <button type="button" onclick="submitCheckout('email')"
+                            class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                            <span>✉️</span> Email
+                        </button>
+                    </div>
+                </div>
+                <button type="button" onclick="closeCheckoutForm()"
+                    class="w-full bg-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-400 transition">
+                    Batal
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg font-semibold mb-2">🌾 TokoTani</p>
+            <p class="text-gray-400">&copy; 2025 TokoTani. Semua hak dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Script (kept original functions + enhancements for mobile UI/animation) -->
+    <script>
+        /* -----------------------
        ORIGINAL: Banner Slider
        ----------------------- */
-    const slider = document.getElementById('bannerSlider');
-    const slides = slider.children.length;
-    let index = 0;
+        const slider = document.getElementById('bannerSlider');
+        const slides = slider.children.length;
+        let index = 0;
 
-    function showSlide(i) {
-      index = (i + slides) % slides;
-      slider.style.transform = `translateX(-${index * 100}%)`;
-    }
+        function showSlide(i) {
+            index = (i + slides) % slides;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
 
-    document.getElementById('nextSlide').onclick = () => showSlide(index + 1);
-    document.getElementById('prevSlide').onclick = () => showSlide(index - 1);
+        document.getElementById('nextSlide').onclick = () => showSlide(index + 1);
+        document.getElementById('prevSlide').onclick = () => showSlide(index - 1);
 
-    let sliderInterval = setInterval(() => showSlide(index + 1), 5000);
+        let sliderInterval = setInterval(() => showSlide(index + 1), 5000);
 
-    // pause on hover (desktop)
-    slider.addEventListener('mouseenter', ()=> clearInterval(sliderInterval));
-    slider.addEventListener('mouseleave', ()=> sliderInterval = setInterval(()=> showSlide(index+1), 5000));
+        // pause on hover (desktop)
+        slider.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+        slider.addEventListener('mouseleave', () => sliderInterval = setInterval(() => showSlide(index + 1), 5000));
 
 
-    /* -----------------------
-       ORIGINAL: Products + Cart (untouched logic)
-       ----------------------- */
-    const products = [
-      {id:1,name:'Cangkul Premium',price:150000,image:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop'},
-      {id:2,name:'Sprayer Elektrik',price:850000,image:'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop'},
-      {id:3,name:'Benih Padi Unggul',price:45000,image:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'},
-      {id:4,name:'Pupuk Organik 10kg',price:120000,image:'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&h=300&fit=crop'},
-      {id:5,name:'Traktor Mini',price:15000000,image:'https://images.unsplash.com/photo-1589395937658-0daa8aef0e23?w=400&h=300&fit=crop'},
-      {id:6,name:'Selang Air 50m',price:250000,image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'},
-      {id:7,name:'Pompa Air Pertanian',price:1250000,image:'https://images.unsplash.com/photo-1590080875838-6f682b1e16a0?w=400&h=300&fit=crop'},
-      {id:8,name:'Sabit Baja',price:90000,image:'https://images.unsplash.com/photo-1515540242709-1f3b1b063be4?w=400&h=300&fit=crop'},
-      {id:9,name:'Pestisida Organik',price:60000,image:'https://images.unsplash.com/photo-1524593169911-4cbb45e2c5c9?w=400&h=300&fit=crop'}
-    ];
+        /* -----------------------
+           ORIGINAL: Products + Cart (untouched logic)
+           ----------------------- */
+        const products = [{
+                id: 1,
+                name: 'Cangkul Premium',
+                price: 150000,
+                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop'
+            },
+            {
+                id: 2,
+                name: 'Sprayer Elektrik',
+                price: 850000,
+                image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop'
+            },
+            {
+                id: 3,
+                name: 'Benih Padi Unggul',
+                price: 45000,
+                image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'
+            },
+            {
+                id: 4,
+                name: 'Pupuk Organik 10kg',
+                price: 120000,
+                image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&h=300&fit=crop'
+            },
+            {
+                id: 5,
+                name: 'Traktor Mini',
+                price: 15000000,
+                image: 'https://images.unsplash.com/photo-1589395937658-0daa8aef0e23?w=400&h=300&fit=crop'
+            },
+            {
+                id: 6,
+                name: 'Selang Air 50m',
+                price: 250000,
+                image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'
+            },
+            {
+                id: 7,
+                name: 'Pompa Air Pertanian',
+                price: 1250000,
+                image: 'https://images.unsplash.com/photo-1590080875838-6f682b1e16a0?w=400&h=300&fit=crop'
+            },
+            {
+                id: 8,
+                name: 'Sabit Baja',
+                price: 90000,
+                image: 'https://images.unsplash.com/photo-1515540242709-1f3b1b063be4?w=400&h=300&fit=crop'
+            },
+            {
+                id: 9,
+                name: 'Pestisida Organik',
+                price: 60000,
+                image: 'https://images.unsplash.com/photo-1524593169911-4cbb45e2c5c9?w=400&h=300&fit=crop'
+            }
+        ];
 
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function scrollToProduk() {
-      document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
-    }
+        function scrollToProduk() {
+            document.getElementById('produk').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
 
-    function renderProducts() {
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
-      products.forEach(p => {
-        const el = document.createElement('div');
-        el.className = 'bg-white rounded-xl shadow-md hover-scale p-4 flex flex-col product-card reveal';
-        el.innerHTML = `
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            products.forEach(p => {
+                const el = document.createElement('div');
+                el.className =
+                'bg-white rounded-xl shadow-md hover-scale p-4 flex flex-col product-card reveal';
+                el.innerHTML = `
           <img src="${p.image}" alt="${p.name}" class="rounded-lg mb-3 w-full h-40 object-cover">
           <h3 class="font-semibold text-gray-800 mb-2">${p.name}</h3>
           <p class="text-red-600 font-bold mb-3">Rp ${p.price.toLocaleString()}</p>
@@ -405,52 +557,61 @@
             Tambah ke Keranjang
           </button>
         `;
-        grid.appendChild(el);
-      });
-      // after new DOM elements, re-run reveal observer
-      observeReveals();
-    }
+                grid.appendChild(el);
+            });
+            // after new DOM elements, re-run reveal observer
+            observeReveals();
+        }
 
-    function updateCartCount() {
-      const count = cart.reduce((acc, item) => acc + item.qty, 0);
-      const cartCountDesktop = document.getElementById('cartCount');
-      const cartCountMobile = document.getElementById('cartCountMobile');
-      if (cartCountDesktop) cartCountDesktop.innerText = count;
-      if (cartCountMobile) cartCountMobile.innerText = count;
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
+        function updateCartCount() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            const cartCountDesktop = document.getElementById('cartCount');
+            const cartCountMobile = document.getElementById('cartCountMobile');
+            if (cartCountDesktop) cartCountDesktop.innerText = count;
+            if (cartCountMobile) cartCountMobile.innerText = count;
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
 
-    function addToCart(id) {
-      const product = products.find(p => p.id === id);
-      const existing = cart.find(i => i.id === id);
-      if (existing) { existing.qty++; }
-      else { cart.push({...product, qty:1}); }
-      updateCartCount();
-      const btns = document.querySelectorAll(`button[onclick="addToCart(${id})"]`);
-      btns.forEach(btn => { btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),400); });
-    }
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(i => i.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({
+                    ...product,
+                    qty: 1
+                });
+            }
+            updateCartCount();
+            const btns = document.querySelectorAll(`button[onclick="addToCart(${id})"]`);
+            btns.forEach(btn => {
+                btn.classList.add('shake');
+                setTimeout(() => btn.classList.remove('shake'), 400);
+            });
+        }
 
-    function toggleCart() {
-      const modal = document.getElementById('cartModal');
-      modal.classList.toggle('hidden');
-      modal.classList.toggle('flex');
-      renderCart();
-    }
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('hidden');
+            modal.classList.toggle('flex');
+            renderCart();
+        }
 
-    function renderCart() {
-      const container = document.getElementById('cartItems');
-      container.innerHTML = '';
-      if (cart.length === 0) {
-        container.innerHTML = '<p class="text-center text-gray-500 py-8">Keranjang masih kosong</p>';
-        document.getElementById('cartTotal').innerText = 'Rp 0';
-        return;
-      }
-      let total = 0;
-      cart.forEach(item => {
-        total += item.price * item.qty;
-        const el = document.createElement('div');
-        el.className = 'flex justify-between items-center mb-4 border-b pb-3';
-        el.innerHTML = `
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            container.innerHTML = '';
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-500 py-8">Keranjang masih kosong</p>';
+                document.getElementById('cartTotal').innerText = 'Rp 0';
+                return;
+            }
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.qty;
+                const el = document.createElement('div');
+                el.className = 'flex justify-between items-center mb-4 border-b pb-3';
+                el.innerHTML = `
           <div class="flex items-center gap-4">
             <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
             <div>
@@ -464,180 +625,197 @@
             <button onclick="changeQty(${item.id},1)" class="px-2 bg-gray-200 rounded">+</button>
           </div>
         `;
-        container.appendChild(el);
-      });
-      document.getElementById('cartTotal').innerText = 'Rp ' + total.toLocaleString();
-    }
+                container.appendChild(el);
+            });
+            document.getElementById('cartTotal').innerText = 'Rp ' + total.toLocaleString();
+        }
 
-    function changeQty(id, change) {
-      const index = cart.findIndex(i => i.id === id);
-      if (index > -1) {
-        cart[index].qty += change;
-        if (cart[index].qty <= 0) cart.splice(index, 1);
+        function changeQty(id, change) {
+            const index = cart.findIndex(i => i.id === id);
+            if (index > -1) {
+                cart[index].qty += change;
+                if (cart[index].qty <= 0) cart.splice(index, 1);
+                updateCartCount();
+                renderCart();
+            }
+        }
+
+        function showCheckoutForm() {
+            document.getElementById('checkoutModal').classList.remove('hidden');
+            document.getElementById('checkoutModal').classList.add('flex');
+        }
+
+        function closeCheckoutForm() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+            document.getElementById('checkoutModal').classList.remove('flex');
+        }
+
+        function submitCheckout(method) {
+            const name = document.getElementById('buyerName').value.trim();
+            const phone = document.getElementById('buyerPhone').value.trim();
+            const address = document.getElementById('buyerAddress').value.trim();
+            if (!name || !phone || !address) {
+                alert('Lengkapi semua data terlebih dahulu.');
+                return;
+            }
+
+            let message = `Halo, saya ingin memesan:%0A`;
+            cart.forEach(item => message +=
+                `- ${item.name} x${item.qty} = Rp ${ (item.price*item.qty).toLocaleString() }%0A`);
+            message +=
+                `%0ATotal: Rp ${cart.reduce((t,i)=>t+i.price*i.qty,0).toLocaleString()}%0A%0AData Pembeli:%0A👤 Nama: ${name}%0A📱 HP: ${phone}%0A🏠 Alamat: ${address}`;
+
+            if (method === 'whatsapp') {
+                window.open(`https://wa.me/62895414357400?text=${message}`, '_blank');
+            } else {
+                window.location.href = `mailto:candrasuryapermana79@gmail.com?subject=Pesanan Baru&body=${message}`;
+            }
+        }
+
+        /* Initial rendering */
+        renderProducts();
         updateCartCount();
-        renderCart();
-      }
-    }
-
-    function showCheckoutForm() {
-      document.getElementById('checkoutModal').classList.remove('hidden');
-      document.getElementById('checkoutModal').classList.add('flex');
-    }
-
-    function closeCheckoutForm() {
-      document.getElementById('checkoutModal').classList.add('hidden');
-      document.getElementById('checkoutModal').classList.remove('flex');
-    }
-
-    function submitCheckout(method) {
-      const name = document.getElementById('buyerName').value.trim();
-      const phone = document.getElementById('buyerPhone').value.trim();
-      const address = document.getElementById('buyerAddress').value.trim();
-      if (!name || !phone || !address) { alert('Lengkapi semua data terlebih dahulu.'); return; }
-
-      let message = `Halo, saya ingin memesan:%0A`;
-      cart.forEach(item => message += `- ${item.name} x${item.qty} = Rp ${ (item.price*item.qty).toLocaleString() }%0A`);
-      message += `%0ATotal: Rp ${cart.reduce((t,i)=>t+i.price*i.qty,0).toLocaleString()}%0A%0AData Pembeli:%0A👤 Nama: ${name}%0A📱 HP: ${phone}%0A🏠 Alamat: ${address}`;
-
-      if (method === 'whatsapp') {
-        window.open(`https://wa.me/62895414357400?text=${message}`, '_blank');
-      } else {
-        window.location.href = `mailto:candrasuryapermana79@gmail.com?subject=Pesanan Baru&body=${message}`;
-      }
-    }
-
-    /* Initial rendering */
-    renderProducts();
-    updateCartCount();
 
 
-    /* -----------------------
-       ENHANCEMENTS: Mobile bottom active state + scroll reveals
-       ----------------------- */
+        /* -----------------------
+           ENHANCEMENTS: Mobile bottom active state + scroll reveals
+           ----------------------- */
 
-    // scroll to section helper used by bottom nav
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (id === 'cart') { toggleCart(); }
-      setActiveBottom(id === 'cart' ? 'cart' : id);
-    }
-
-    // Set active bottom nav by target id or 'cart'
-    function setActiveBottom(targetId) {
-      const items = document.querySelectorAll('.bottom-item');
-      items.forEach(it => {
-        const t = it.getAttribute('data-target');
-        if ((targetId === 'cart' && t === null && it.querySelector('.icon') && it.innerText.includes('🛒')) || t === targetId) {
-          it.classList.add('active');
-        } else {
-          it.classList.remove('active');
+        // scroll to section helper used by bottom nav
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            if (id === 'cart') {
+                toggleCart();
+            }
+            setActiveBottom(id === 'cart' ? 'cart' : id);
         }
-      });
-    }
 
-    // IntersectionObserver to highlight bottom nav based on visible section
-    const sectionTargets = ['hero','produk','tentang'];
-    const bottomItems = document.querySelectorAll('.bottom-item');
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -50% 0px', // prefer center of viewport
-      threshold: 0
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          // find bottom item with data-target == id
-          bottomItems.forEach(it => {
-            if (it.getAttribute('data-target') === id) it.classList.add('active');
-            else it.classList.remove('active');
-          });
+        // Set active bottom nav by target id or 'cart'
+        function setActiveBottom(targetId) {
+            const items = document.querySelectorAll('.bottom-item');
+            items.forEach(it => {
+                const t = it.getAttribute('data-target');
+                if ((targetId === 'cart' && t === null && it.querySelector('.icon') && it.innerText.includes(
+                        '🛒')) || t === targetId) {
+                    it.classList.add('active');
+                } else {
+                    it.classList.remove('active');
+                }
+            });
         }
-      });
-    }, observerOptions);
 
-    sectionTargets.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) sectionObserver.observe(el);
-    });
+        // IntersectionObserver to highlight bottom nav based on visible section
+        const sectionTargets = ['hero', 'produk', 'tentang'];
+        const bottomItems = document.querySelectorAll('.bottom-item');
 
-    // Also highlight cart when cart modal open
-    const cartModal = document.getElementById('cartModal');
-    const observerModal = new MutationObserver(()=> {
-      const isOpen = !cartModal.classList.contains('hidden');
-      if (isOpen) setActiveBottom('cart');
-      else {
-        // trigger manual check of current visible section
-        document.querySelectorAll('#hero,#produk,#tentang').forEach(section => {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= window.innerHeight*0.45 && rect.bottom >= window.innerHeight*0.35) {
-            setActiveBottom(section.id);
-          }
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -50% 0px', // prefer center of viewport
+            threshold: 0
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    // find bottom item with data-target == id
+                    bottomItems.forEach(it => {
+                        if (it.getAttribute('data-target') === id) it.classList.add('active');
+                        else it.classList.remove('active');
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sectionTargets.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) sectionObserver.observe(el);
         });
-      }
-    });
-    observerModal.observe(cartModal, { attributes: true, attributeFilter: ['class'] });
 
-    /* -----------------------
-       ENHANCEMENTS: Scroll reveal animation for elements with class 'reveal'
-       ----------------------- */
-    function observeReveals(){
-      const reveals = document.querySelectorAll('.reveal');
-      if (!('IntersectionObserver' in window)) {
-        reveals.forEach(r => r.classList.add('show'));
-        return;
-      }
-      const revealObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-            obs.unobserve(entry.target);
-          }
+        // Also highlight cart when cart modal open
+        const cartModal = document.getElementById('cartModal');
+        const observerModal = new MutationObserver(() => {
+            const isOpen = !cartModal.classList.contains('hidden');
+            if (isOpen) setActiveBottom('cart');
+            else {
+                // trigger manual check of current visible section
+                document.querySelectorAll('#hero,#produk,#tentang').forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight *
+                        0.35) {
+                        setActiveBottom(section.id);
+                    }
+                });
+            }
         });
-      }, { threshold: 0.12 });
-      reveals.forEach(r => revealObserver.observe(r));
-    }
-    observeReveals();
+        observerModal.observe(cartModal, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
 
-    /* -----------------------
-       SMALL: Improve focus states for accessibility
-       ----------------------- */
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
-    });
+        /* -----------------------
+           ENHANCEMENTS: Scroll reveal animation for elements with class 'reveal'
+           ----------------------- */
+        function observeReveals() {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(r => r.classList.add('show'));
+                return;
+            }
+            const revealObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.12
+            });
+            reveals.forEach(r => revealObserver.observe(r));
+        }
+        observeReveals();
 
-    /* -----------------------
-       SMALL: Responsive product columns adjustment (already handled via Tailwind classes),
-       keep this in case dynamic adjustments are needed later
-       ----------------------- */
-    window.addEventListener('resize', () => {
-      // placeholder for possible dynamic behavior; no override to original logic
-    });
+        /* -----------------------
+           SMALL: Improve focus states for accessibility
+           ----------------------- */
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
+        });
 
-    /* -----------------------
-       UX: When page loads, set bottom active to hero (mobile)
-       ----------------------- */
-    window.addEventListener('load', () => {
-      if (window.innerWidth <= 768) setActiveBottom('hero');
-    });
+        /* -----------------------
+           SMALL: Responsive product columns adjustment (already handled via Tailwind classes),
+           keep this in case dynamic adjustments are needed later
+           ----------------------- */
+        window.addEventListener('resize', () => {
+            // placeholder for possible dynamic behavior; no override to original logic
+        });
 
-    /* -----------------------
-       Accessibility: close modals on Escape
-       ----------------------- */
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        // close cart or checkout if open
-        const cm = document.getElementById('cartModal');
-        const ch = document.getElementById('checkoutModal');
-        if (cm && !cm.classList.contains('hidden')) toggleCart();
-        if (ch && !ch.classList.contains('hidden')) closeCheckoutForm();
-      }
-    });
+        /* -----------------------
+           UX: When page loads, set bottom active to hero (mobile)
+           ----------------------- */
+        window.addEventListener('load', () => {
+            if (window.innerWidth <= 768) setActiveBottom('hero');
+        });
 
-  </script>
+        /* -----------------------
+           Accessibility: close modals on Escape
+           ----------------------- */
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                // close cart or checkout if open
+                const cm = document.getElementById('cartModal');
+                const ch = document.getElementById('checkoutModal');
+                if (cm && !cm.classList.contains('hidden')) toggleCart();
+                if (ch && !ch.classList.contains('hidden')) closeCheckoutForm();
+            }
+        });
+    </script>
 </body>
+
 </html>
