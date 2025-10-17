@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TokoTani - Solusi Alat Pertanian Modern</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+
+    /* ✨ Animasi halus */
+    .fade-in { animation: fadeIn 1s ease-out both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hover-scale { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .hover-scale:hover { transform: scale(1.05) translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    .modal-fade-in { animation: modalFadeIn 0.35s ease-out both; }
+    @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    .shake { animation: shake 0.4s ease-in-out; }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* ✨ Bottom bar modern (mobile only) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+      z-index: 50;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 64px;
+    }
+    .bottom-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+    .bottom-item.active,
+    .bottom-item:hover { color: #dc2626; transform: scale(1.05); }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      body { padding-bottom: 70px; }
+      section { text-align: center; }
+      h2 { font-size: 1.5rem !important; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- ✅ Top Navigation (Desktop) -->
+  <nav class="bg-white shadow-md fixed w-full top-0 z-40 hidden md:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-red-600">🌾 TokoTani</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="#produk" class="text-gray-700 hover:text-red-600 font-medium">Produk</a>
+          <a href="#tentang" class="text-gray-700 hover:text-red-600 font-medium">Tentang</a>
+          <button onclick="toggleCart()" class="relative bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+            🛒 Keranjang
+            <span id="cartCount" class="absolute -top-2 -right-2 bg-white text-red-600 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ Bottom Navigation (Mobile) -->
+  <div class="bottom-nav md:hidden">
+    <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="bottom-item active">
+      <span class="text-xl">🏠</span>
+      <span>Beranda</span>
+    </button>
+    <button onclick="scrollToProduk()" class="bottom-item">
+      <span class="text-xl">🛍️</span>
+      <span>Produk</span>
+    </button>
+    <button onclick="toggleCart()" class="bottom-item relative">
+      <span class="text-xl">🛒</span>
+      <span>Keranjang</span>
+      <span id="cartCountMobile" class="absolute top-1 right-3 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold">0</span>
+    </button>
+  </div>
+
+  <!-- ✅ Hero Section -->
+  <section class="relative mt-16 md:mt-16 bg-gradient-to-r from-red-600 to-red-700 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-32">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="fade-in text-center md:text-left">
+          <h2 class="text-3xl md:text-5xl font-bold mb-3">Solusi Alat Tani Modern</h2>
+          <p class="text-xl md:text-2xl mb-1">Murah & Berkualitas!</p>
+          <p class="text-base md:text-lg mb-6 opacity-90">Tingkatkan produktivitas pertanian Anda dengan alat-alat modern terbaik</p>
+          <button onclick="scrollToProduk()" class="bg-white text-red-600 px-6 py-3 md:px-8 md:py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition hover-scale">
+            🛍️ Belanja Sekarang
+          </button>
+        </div>
+        <div class="hidden md:block">
+          <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop" alt="Alat Pertanian" class="rounded-lg shadow-2xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Banner Slider Section -->
+  <section class="relative w-full bg-white py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative overflow-hidden rounded-xl shadow-lg">
+        <div id="bannerSlider" class="flex transition-transform duration-700 ease-in-out">
+          <!-- Ganti src sesuai gambar banner Anda -->
+          <img src="96319eb6-820a-4620-950a-98cceeba4466.png" class="w-full flex-shrink-0 object-cover" alt="Banner 1">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1600&h=500&fit=crop" class="w-full flex-shrink-0 object-cover" alt="Banner 2">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&h=500&fit=crop" class="w-full flex-shrink-0 object-cover" alt="Banner 3">
+        </div>
+
+        <!-- Tombol navigasi -->
+        <button id="prevSlide" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-700 rounded-full p-2 shadow-md">❮</button>
+        <button id="nextSlide" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-700 rounded-full p-2 shadow-md">❯</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Produk -->
+  <section id="produk" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Katalog Produk Kami</h2>
+      <p class="text-lg text-gray-600">Pilihan terbaik untuk kebutuhan pertanian modern</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8" id="productGrid"></div>
+  </section>
+
+  <!-- ✅ Tentang -->
+  <section id="tentang" class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Tentang Kami</h2>
+          <p class="text-gray-600 mb-4">TokoTani adalah platform e-commerce terpercaya yang menyediakan berbagai alat pertanian modern berkualitas tinggi dengan harga terjangkau.</p>
+          <p class="text-gray-600 mb-4">Kami berkomitmen untuk membantu petani Indonesia meningkatkan produktivitas dengan teknologi pertanian terkini.</p>
+          <div class="flex justify-center md:justify-start space-x-6 mt-6">
+            <div class="text-center">
+              <p class="text-3xl font-bold text-red-600">500+</p>
+              <p class="text-gray-600">Produk</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold text-red-600">10K+</p>
+              <p class="text-gray-600">Pelanggan</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold text-red-600">100%</p>
+              <p class="text-gray-600">Terpercaya</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop" alt="Petani" class="rounded-lg shadow-xl">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Hubungi Kami -->
+  <section class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Hubungi Kami</h2>
+        <p class="text-lg text-gray-600">Ada pertanyaan? Kami siap membantu Anda</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-4xl mb-4">📱</div>
+          <h3 class="font-semibold text-lg mb-2">WhatsApp</h3>
+          <p class="text-gray-600">+62 812-3456-7890</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-4xl mb-4">✉️</div>
+          <h3 class="font-semibold text-lg mb-2">Email</h3>
+          <p class="text-gray-600">support@tokotani.com</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-4xl mb-4">📍</div>
+          <h3 class="font-semibold text-lg mb-2">Alamat</h3>
+          <p class="text-gray-600">Jl. Pertanian No. 123, Jakarta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Cart Modal -->
+  <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-fade-in">
+      <div class="sticky top-0 bg-white border-b p-6 flex justify-between items-center">
+        <h3 class="text-2xl font-bold text-gray-800">🛒 Keranjang Belanja</h3>
+        <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+      </div>
+      <div id="cartItems" class="p-6"></div>
+      <div class="sticky bottom-0 bg-gray-50 border-t p-6">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xl font-semibold">Total:</span>
+          <span id="cartTotal" class="text-2xl font-bold text-red-600">Rp 0</span>
+        </div>
+        <button onclick="showCheckoutForm()" class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+          Checkout Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Checkout Modal -->
+  <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-md w-full modal-fade-in">
+      <div class="bg-red-600 text-white p-6 rounded-t-lg">
+        <h3 class="text-2xl font-bold">📝 Data Pembeli</h3>
+        <p class="text-sm opacity-90 mt-1">Lengkapi data untuk melanjutkan pesanan</p>
+      </div>
+      <form id="checkoutForm" class="p-6">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap *</label>
+          <input type="text" id="buyerName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600" placeholder="Masukkan nama Anda">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 font-semibold mb-2">No. HP / WhatsApp *</label>
+          <input type="tel" id="buyerPhone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600" placeholder="08xx xxxx xxxx">
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 font-semibold mb-2">Alamat Lengkap *</label>
+          <textarea id="buyerAddress" required rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600" placeholder="Jl. Nama Jalan, Kota, Provinsi"></textarea>
+        </div>
+        <div class="mb-6">
+          <p class="text-sm text-gray-600 mb-3">Pilih metode pengiriman pesanan:</p>
+          <div class="flex gap-3">
+            <button type="button" onclick="submitCheckout('whatsapp')" class="flex-1 bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition flex items-center justify-center gap-2">
+              <span>📱</span> WhatsApp
+            </button>
+            <button type="button" onclick="submitCheckout('email')" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2">
+              <span>✉️</span> Email
+            </button>
+          </div>
+        </div>
+        <button type="button" onclick="closeCheckoutForm()" class="w-full bg-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-400 transition">
+          Batal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ✅ Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-lg font-semibold mb-2">🌾 TokoTani</p>
+      <p class="text-gray-400">&copy; 2025 TokoTani. Semua hak dilindungi.</p>
+    </div>
+  </footer>
+
+  <!-- ✅ Script -->
+  <script>
+    /* Slider Banner */
+    const slider = document.getElementById('bannerSlider');
+    const slides = slider.children.length;
+    let index = 0;
+
+    function showSlide(i) {
+      index = (i + slides) % slides;
+      slider.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    document.getElementById('nextSlide').onclick = () => showSlide(index + 1);
+    document.getElementById('prevSlide').onclick = () => showSlide(index - 1);
+
+    setInterval(() => showSlide(index + 1), 5000); // otomatis 5 detik
+
+    
+    const products = [
+      {id:1,name:'Cangkul Premium',price:150000,image:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop'},
+      {id:2,name:'Sprayer Elektrik',price:850000,image:'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop'},
+      {id:3,name:'Benih Padi Unggul',price:45000,image:'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop'},
+      {id:4,name:'Pupuk Organik 10kg',price:120000,image:'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&h=300&fit=crop'},
+      {id:5,name:'Traktor Mini',price:15000000,image:'https://images.unsplash.com/photo-1589395937658-0daa8aef0e23?w=400&h=300&fit=crop'},
+      {id:6,name:'Selang Air 50m',price:250000,image:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop'},
+      {id:7,name:'Pompa Air Pertanian',price:1250000,image:'https://images.unsplash.com/photo-1590080875838-6f682b1e16a0?w=400&h=300&fit=crop'},
+      {id:8,name:'Sabit Baja',price:90000,image:'https://images.unsplash.com/photo-1515540242709-1f3b1b063be4?w=400&h=300&fit=crop'},
+      {id:9,name:'Pestisida Organik',price:60000,image:'https://images.unsplash.com/photo-1524593169911-4cbb45e2c5c9?w=400&h=300&fit=crop'}
+    ];
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function scrollToProduk() {
+      document.getElementById('produk').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      products.forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'bg-white rounded-xl shadow-md hover-scale p-4 flex flex-col';
+        el.innerHTML = `
+          <img src="${p.image}" alt="${p.name}" class="rounded-lg mb-3 w-full h-40 object-cover">
+          <h3 class="font-semibold text-gray-800 mb-2">${p.name}</h3>
+          <p class="text-red-600 font-bold mb-3">Rp ${p.price.toLocaleString()}</p>
+          <button onclick="addToCart(${p.id})" class="bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
+            Tambah ke Keranjang
+          </button>
+        `;
+        grid.appendChild(el);
+      });
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cartCount').innerText = count;
+      document.getElementById('cartCountMobile').innerText = count;
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const existing = cart.find(i => i.id === id);
+      if (existing) { existing.qty++; }
+      else { cart.push({...product, qty:1}); }
+      updateCartCount();
+      const btns = document.querySelectorAll(`button[onclick="addToCart(${id})"]`);
+      btns.forEach(btn => { btn.classList.add('shake'); setTimeout(()=>btn.classList.remove('shake'),400); });
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cartModal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      container.innerHTML = '';
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 py-8">Keranjang masih kosong</p>';
+        document.getElementById('cartTotal').innerText = 'Rp 0';
+        return;
+      }
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        const el = document.createElement('div');
+        el.className = 'flex justify-between items-center mb-4 border-b pb-3';
+        el.innerHTML = `
+          <div class="flex items-center gap-4">
+            <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
+            <div>
+              <p class="font-semibold text-gray-800">${item.name}</p>
+              <p class="text-red-600 font-bold">Rp ${item.price.toLocaleString()}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="changeQty(${item.id},-1)" class="px-2 bg-gray-200 rounded">-</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${item.id},1)" class="px-2 bg-gray-200 rounded">+</button>
+          </div>
+        `;
+        container.appendChild(el);
+      });
+      document.getElementById('cartTotal').innerText = 'Rp ' + total.toLocaleString();
+    }
+
+    function changeQty(id, change) {
+      const index = cart.findIndex(i => i.id === id);
+      if (index > -1) {
+        cart[index].qty += change;
+        if (cart[index].qty <= 0) cart.splice(index, 1);
+        updateCartCount();
+        renderCart();
+      }
+    }
+
+    function showCheckoutForm() {
+      document.getElementById('checkoutModal').classList.remove('hidden');
+      document.getElementById('checkoutModal').classList.add('flex');
+    }
+
+    function closeCheckoutForm() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+      document.getElementById('checkoutModal').classList.remove('flex');
+    }
+
+    function submitCheckout(method) {
+      const name = document.getElementById('buyerName').value.trim();
+      const phone = document.getElementById('buyerPhone').value.trim();
+      const address = document.getElementById('buyerAddress').value.trim();
+      if (!name || !phone || !address) { alert('Lengkapi semua data terlebih dahulu.'); return; }
+
+      let message = `Halo, saya ingin memesan:%0A`;
+      cart.forEach(item => message += `- ${item.name} x${item.qty} = Rp ${ (item.price*item.qty).toLocaleString() }%0A`);
+      message += `%0ATotal: Rp ${cart.reduce((t,i)=>t+i.price*i.qty,0).toLocaleString()}%0A%0AData Pembeli:%0A👤 Nama: ${name}%0A📱 HP: ${phone}%0A🏠 Alamat: ${address}`;
+
+      if (method === 'whatsapp') {
+        window.open(`https://wa.me/6281234567890?text=${message}`, '_blank');
+      } else {
+        window.location.href = `mailto:support@tokotani.com?subject=Pesanan Baru&body=${message}`;
+      }
+    }
+
+    renderProducts();
+    updateCartCount();
+  </script>
+</body>
+</html>
